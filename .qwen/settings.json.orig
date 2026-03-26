@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(docker-compose *)",
+      "Bash(docker *)",
+      "Bash(groups)",
+      "Bash(sudo *)",
+      "Bash(newgrp *)",
+      "Bash(eof)",
+      "Bash(netstat *)",
+      "Bash(ss *)"
+    ]
+  }
+}

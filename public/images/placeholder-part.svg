@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300">
+  <rect width="400" height="300" fill="#f5f5f5"/>
+  <g fill="#bdbdbd">
+    <!-- Иконка запчасти (шестеренка) -->
+    <circle cx="200" cy="130" r="50" fill="none" stroke="#bdbdbd" stroke-width="8"/>
+    <circle cx="200" cy="130" r="20"/>
+    <!-- Зубцы шестеренки -->
+    <rect x="192" y="70" width="16" height="20"/>
+    <rect x="192" y="210" width="16" height="20"/>
+    <rect x="70" y="122" width="20" height="16"/>
+    <rect x="310" y="122" width="20" height="16"/>
+    <rect x="106" y="94" width="16" height="16" transform="rotate(-45 114 102)"/>
+    <rect x="278" y="190" width="16" height="16" transform="rotate(-45 286 198)"/>
+    <rect x="106" y="190" width="16" height="16" transform="rotate(45 114 198)"/>
+    <rect x="278" y="94" width="16" height="16" transform="rotate(45 286 102)"/>
+  </g>
+  <text x="200" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#757575">
+    Изображение запчасти
+  </text>
+  <text x="200" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#9e9e9e">
+    Part Image Placeholder
+  </text>
+</svg>
