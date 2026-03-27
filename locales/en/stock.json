@@ -1,16 +1,14 @@
 {
-  "stock": {
-    "title": "Stock",
-    "menu": "Stock Menu",
-    "currentStock": "Current Stock",
-    "receipt": "Receipt",
-    "writeOff": "Write-off",
-    "adjustment": "Adjustment",
-    "history": "History",
-    "transfers": "Transfers",
-    "audit": "Audit",
-    "reports": "Reports"
-  },
+  "title": "Stock",
+  "menu": "Stock Menu",
+  "currentStock": "Current Stock",
+  "receipt": "Receipt",
+  "writeOff": "Write-off",
+  "adjustment": "Adjustment",
+  "history": "Operation History",
+  "transfers": "Transfers",
+  "audit": "Audit",
+  "reports": "Reports",
   "stockTable": {
     "title": "Current Stock",
     "partNumber": "Part Number",
@@ -86,7 +84,7 @@
   },
   "receipt": {
     "title": "Parts Receipt",
-    "description": "Receive parts into stock",
+    "description": "Receive parts to stock",
     "selectPart": "Select Part",
     "partPlaceholder": "Start typing name or part number",
     "quantity": "Quantity",
@@ -103,7 +101,7 @@
     "cancel": "Cancel",
     "confirmTitle": "Confirm Receipt",
     "confirmMessage": "Are you sure you want to receive {quantity} {units} of part \"{partName}\"?",
-    "units": "{quantity, plural, one {piece} other {pieces}}",
+    "units": "{quantity, plural, one {unit} other {units}}",
     "batchReceipt": "Batch Receipt",
     "addMore": "Add More",
     "remove": "Remove",
@@ -132,7 +130,7 @@
     "cancel": "Cancel",
     "confirmTitle": "Confirm Write-off",
     "confirmMessage": "Are you sure you want to write off {quantity} {units} of part \"{partName}\"?",
-    "units": "{quantity, plural, one {piece} other {pieces}}",
+    "units": "{quantity, plural, one {unit} other {units}}",
     "reasons": {
       "defect": "Defect",
       "loss": "Loss",
@@ -228,7 +226,7 @@
     "cancelTransfer": "Cancel Transfer"
   },
   "audit": {
-    "title": "Inventory Audit",
+    "title": "Audit",
     "newAudit": "New Audit",
     "auditDate": "Audit Date",
     "status": "Status",

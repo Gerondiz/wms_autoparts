@@ -1,19 +1,17 @@
 {
-  "admin": {
-    "title": "Администрирование",
-    "menu": "Меню администратора",
-    "dashboard": "Панель управления",
-    "users": "Пользователи",
-    "roles": "Роли",
-    "hierarchy": "Иерархия",
-    "parts": "Запчасти",
-    "nodeTypes": "Типы узлов",
-    "settings": "Настройки",
-    "analytics": "Аналитика",
-    "logs": "Журналы",
-    "backup": "Резервные копии"
-  },
-  "dashboard": {
+  "title": "Администрирование",
+  "menu": "Меню администратора",
+  "dashboard": "Панель управления",
+  "users": "Пользователи",
+  "roles": "Роли",
+  "hierarchy": "Иерархия",
+  "parts": "Запчасти",
+  "nodeTypes": "Типы узлов",
+  "settings": "Настройки",
+  "analytics": "Аналитика",
+  "logs": "Журналы",
+  "backup": "Резервные копии",
+  "dashboardPage": {
     "title": "Панель управления",
     "welcome": "Добро пожаловать, {name}!",
     "subtitle": "Обзор системы WMS Autoparts",
@@ -39,7 +37,7 @@
     "used": "Использовано",
     "available": "Доступно"
   },
-  "analytics": {
+  "analyticsPage": {
     "title": "Аналитика",
     "overview": "Обзор",
     "ordersByStatus": "Заказы по статусам",
@@ -70,7 +68,7 @@
       "users": "Пользователи"
     }
   },
-  "hierarchy": {
+  "hierarchyPage": {
     "title": "Управление иерархией",
     "subtitle": "Структура каталога запчастей",
     "createNode": "Создать узел",
@@ -110,7 +108,7 @@
     "slug": "URL-алиас",
     "slugPlaceholder": "transmission/oil"
   },
-  "parts": {
+  "partsPage": {
     "title": "Управление запчастями",
     "subtitle": "Каталог запчастей и комплектующих",
     "createPart": "Создать запчасть",
@@ -177,7 +175,7 @@
     "addTag": "Добавить тег",
     "removeTag": "Удалить тег"
   },
-  "users": {
+  "usersPage": {
     "title": "Пользователи",
     "subtitle": "Управление пользователями системы",
     "createUser": "Создать пользователя",
@@ -224,7 +222,7 @@
     "userBlocked": "Пользователь заблокирован",
     "userUnblocked": "Пользователь разблокирован"
   },
-  "roles": {
+  "rolesPage": {
     "title": "Роли",
     "subtitle": "Управление ролями и разрешениями",
     "createRole": "Создать роль",

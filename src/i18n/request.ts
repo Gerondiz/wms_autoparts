@@ -92,14 +92,14 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const messages = await loadTranslations(locale as string);
 
   // Объединяем все namespace в один объект messages
-  // next-intl поддерживает плоскую структуру или вложенную через namespace
+  // Каждый namespace остаётся в своём ключевом пространстве
   const combinedMessages: AbstractIntlMessages = {
     ...messages.common,
-    catalog: messages.catalog,
-    orders: messages.orders,
-    stock: messages.stock,
-    admin: messages.admin,
-    auth: messages.auth,
+    ...messages.catalog,
+    ...messages.orders,
+    ...messages.stock,
+    ...messages.admin,
+    ...messages.auth,
   };
 
   const config: RequestConfig = {

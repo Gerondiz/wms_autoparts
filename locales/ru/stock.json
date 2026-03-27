@@ -1,16 +1,14 @@
 {
-  "stock": {
-    "title": "Склад",
-    "menu": "Складское меню",
-    "currentStock": "Текущие остатки",
-    "receipt": "Приход",
-    "writeOff": "Списание",
-    "adjustment": "Корректировка",
-    "history": "История операций",
-    "transfers": "Перемещения",
-    "audit": "Инвентаризация",
-    "reports": "Отчёты"
-  },
+  "title": "Склад",
+  "menu": "Складское меню",
+  "currentStock": "Текущие остатки",
+  "receipt": "Приход",
+  "writeOff": "Списание",
+  "adjustment": "Корректировка",
+  "history": "История операций",
+  "transfers": "Перемещения",
+  "audit": "Инвентаризация",
+  "reports": "Отчёты",
   "stockTable": {
     "title": "Текущие остатки",
     "partNumber": "Артикул",
