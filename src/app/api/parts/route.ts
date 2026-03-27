@@ -6,25 +6,12 @@ import { partsService } from '@/lib/services';
 /**
  * GET /api/parts
  * Получить список запчастей для узла
+ * Доступно без аутентификации для просмотра каталога
  */
 export async function GET(request: NextRequest) {
   try {
-    const session = await ensureAuth();
-    if (session instanceof Response) {
-      return session;
-    }
-
-    // Проверка прав
-    if (!hasPermission(session, 'catalog_view')) {
-      return errorResponse(
-        ApiErrorCode.FORBIDDEN,
-        'Недостаточно прав для просмотра каталога',
-        HttpStatus.FORBIDDEN
-      );
-    }
-
     const searchParams = request.nextUrl.searchParams;
-    const nodeId = parseInt(searchParams.get('nodeId') || '0', 10);
+    const nodeIdParam = searchParams.get('nodeId');
     const page = parseInt(searchParams.get('page') || '1', 10);
     const limit = parseInt(searchParams.get('limit') || '20', 10);
 
@@ -46,13 +33,17 @@ export async function GET(request: NextRequest) {
       return successResponse(results);
     }
 
-    // Список запчастей узла
-    if (!nodeId || isNaN(nodeId)) {
-      return errorResponse(
-        ApiErrorCode.BAD_REQUEST,
-        'Требуется параметр nodeId',
-        HttpStatus.BAD_REQUEST
-      );
+    // Список запчастей узла - nodeId опционален (null = корневой уровень)
+    let nodeId: number | null = null;
+    if (nodeIdParam && nodeIdParam !== 'null' && nodeIdParam !== '') {
+      nodeId = parseInt(nodeIdParam, 10);
+      if (isNaN(nodeId)) {
+        return errorResponse(
+          ApiErrorCode.BAD_REQUEST,
+          'Неверный формат nodeId',
+          HttpStatus.BAD_REQUEST
+        );
+      }
     }
 
     const validation = partsListSchema.safeParse({ nodeId, page, limit });

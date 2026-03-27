@@ -4,23 +4,26 @@ import { eq, and, like, sql, desc, asc, inArray, isNull } from 'drizzle-orm';
 
 /**
  * Получить запчасти для узла иерархии
+ * Если nodeId = null, возвращает все запчасти корневого уровня
  */
 export async function getPartsByNodeId(
-  nodeId: number,
+  nodeId: number | null,
   page: number = 1,
   limit: number = 20
 ) {
   const offset = (page - 1) * limit;
 
   // Получаем общее количество
+  const countWhere = nodeId === null ? isNull(parts.hierarchyId) : eq(parts.hierarchyId, nodeId);
   const countResult = await db
     .select({ count: sql<number>`count(*)` })
     .from(parts)
-    .where(eq(parts.hierarchyId, nodeId));
+    .where(countWhere);
 
   const total = Number(countResult[0]?.count || 0);
 
   // Получаем запчасти
+  const whereCondition = nodeId === null ? isNull(parts.hierarchyId) : eq(parts.hierarchyId, nodeId);
   const items = await db
     .select({
       id: parts.id,
@@ -37,7 +40,7 @@ export async function getPartsByNodeId(
     })
     .from(parts)
     .leftJoin(partImages, and(eq(partImages.partId, parts.id), eq(partImages.isPrimary, true)))
-    .where(eq(parts.hierarchyId, nodeId))
+    .where(whereCondition)
     .orderBy(asc(parts.name))
     .limit(limit)
     .offset(offset);

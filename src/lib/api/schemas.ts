@@ -29,7 +29,7 @@ export const hierarchyMoveSchema = z.object({
 // ==================== Запчасти ====================
 
 export const partsListSchema = z.object({
-  nodeId: z.number().int().positive(),
+  nodeId: z.number().int().nonnegative().nullable(),
   page: z.number().int().positive().optional().default(1),
   limit: z.number().int().positive().max(100).optional().default(20),
 });
