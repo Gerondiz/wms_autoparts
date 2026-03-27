@@ -88,6 +88,7 @@ export default function HierarchyTree({ rootNodes, selectedNodeId, onNodeSelect 
   return (
     <Box sx={{ height: 'calc(100vh - 300px)', overflow: 'auto' }}>
       <SimpleTreeView
+        data-testid="category-tree"
         expandedItems={expandedNodeIds}
         selectedItems={selectedNodeId?.toString() ?? null}
         onExpandedItemsChange={handleExpansionChange}

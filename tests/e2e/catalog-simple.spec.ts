@@ -12,19 +12,20 @@ test.describe('Каталог - быстрая проверка', () => {
     const title = await page.title();
     expect(title).toContain('WMS');
     
-    // Проверка что страница содержит текст WMS Autoparts
+    // Проверка что страница содержит текст WMS
     await expect(page.locator('text=WMS')).toBeVisible({ timeout: 10000 });
     
     // Логи консоли
     console.log('Ошибки:', consoleLogs.errors.length);
     console.log('Предупреждения:', consoleLogs.warnings.length);
     
-    // Допускаем некоторые ошибки (favicon, next-auth warnings)
+    // Допускаем некоторые ошибки (favicon, warnings, MISSING_MESSAGE)
     const criticalErrors = consoleLogs.errors.filter(e => 
       !e.includes('favicon') && 
-      !e.includes('warn')
+      !e.includes('warn') &&
+      !e.includes('MISSING_MESSAGE')
     );
     
-    expect(criticalErrors.length).toBeLessThan(10);
+    expect(criticalErrors.length).toBeLessThan(5);
   });
 });
