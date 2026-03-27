@@ -17,11 +17,13 @@ import {
   UnfoldMore as ExpandAllIcon,
   UnfoldLess as CollapseAllIcon,
   Category as CategoryIcon,
+  LocalOffer as PartsIcon,
 } from '@mui/icons-material';
 import {
   useHierarchyChildren,
   HierarchyNode,
 } from '@/lib/hooks/api/useHierarchy';
+import { useHierarchy } from '@/contexts/HierarchyContext';
 
 interface TreeItemLabelProps {
   label: string;
@@ -56,6 +58,9 @@ function TreeItemLabel({ label, partsCount, isLoading }: TreeItemLabelProps) {
       {partsCount !== undefined && partsCount > 0 && (
         <Box
           sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 0.5,
             bgcolor: (theme) => alpha(theme.palette.primary.main, 0.1),
             color: 'primary.main',
             borderRadius: 10,
@@ -65,6 +70,7 @@ function TreeItemLabel({ label, partsCount, isLoading }: TreeItemLabelProps) {
             fontWeight: 600,
           }}
         >
+          <PartsIcon fontSize="inherit" sx={{ fontSize: '0.8rem' }} />
           {partsCount}
         </Box>
       )}
@@ -105,7 +111,7 @@ export default function HierarchyTree({
   const { nodes: rootNodes, isLoading: isLoadingRoot } =
     useHierarchyChildren(null);
 
-  const [expandedNodeIds, setExpandedNodeIds] = useState<string[]>([]);
+  const { expandedNodeIds, setExpandedNodeIds } = useHierarchy();
   const [allNodeIds, setAllNodeIds] = useState<string[]>([]);
 
   useEffect(() => {
@@ -120,7 +126,7 @@ export default function HierarchyTree({
     if (event) {
       setExpandedNodeIds(nodeIds);
     }
-  }, []);
+  }, [setExpandedNodeIds]);
 
   const handleSelectionChange = useCallback((
     event: React.SyntheticEvent | null,
@@ -229,14 +235,19 @@ export default function HierarchyTree({
             '& .MuiTreeItem-content': {
               mb: 0.5,
               borderRadius: 6,
+              py: 0.75,
             },
             '& .MuiTreeItem-content:hover': {
               bgcolor: 'action.hover',
             },
             '& .Mui-selected': {
-              bgcolor: alpha('#1976d2', 0.15),
+              bgcolor: (theme) => alpha(theme.palette.primary.main, 0.2),
               '&:hover': {
-                bgcolor: alpha('#1976d2', 0.25),
+                bgcolor: (theme) => alpha(theme.palette.primary.main, 0.3),
+              },
+              '& .MuiTypography-root': {
+                fontWeight: 600,
+                color: 'primary.main',
               },
             },
           }}

@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 import { Box, Typography } from '@mui/material';
-import HierarchyTree from '@/components/catalog/HierarchyTree';
 import Breadcrumbs from '@/components/catalog/Breadcrumbs';
 import SearchBar from '@/components/catalog/SearchBar';
 import PartsList from '@/components/catalog/PartsList';
@@ -10,10 +9,11 @@ import AddToCartDialog from '@/components/cart/AddToCartDialog';
 import { useHierarchyPath, useHierarchyNode } from '@/lib/hooks/api/useHierarchy';
 import { useParts } from '@/lib/hooks/api/useParts';
 import { useState, useCallback } from 'react';
+import { useHierarchy } from '@/contexts/HierarchyContext';
 
 export default function CatalogPage() {
   const t = useTranslations('catalog');
-  const [selectedNodeId, setSelectedNodeId] = useState<number | null>(null);
+  const { selectedNodeId } = useHierarchy();
   const [addToCartDialogOpen, setAddToCartDialogOpen] = useState(false);
   const [selectedPart, setSelectedPart] = useState<any>(null);
 
@@ -25,23 +25,23 @@ export default function CatalogPage() {
 
   const breadcrumbs = pathData?.path || [];
 
-  const handleNodeSelect = useCallback((nodeId: number | null) => {
-    setSelectedNodeId(nodeId);
-  }, []);
-
   const handleAddToCart = useCallback((part: any) => {
     setSelectedPart(part);
     setAddToCartDialogOpen(true);
   }, []);
+
+  const currentNodeName = nodeData?.node?.name || t('allCategories') || 'Все категории';
 
   return (
     <Box>
       {/* Breadcrumbs and Search */}
       <Box sx={{ mb: 3 }}>
         <Typography variant="h5" fontWeight="600" gutterBottom>
-          {t('title')}
+          {currentNodeName}
         </Typography>
-        <Breadcrumbs path={breadcrumbs} currentLocale="ru" />
+        {breadcrumbs.length > 0 && (
+          <Breadcrumbs path={breadcrumbs} currentLocale="ru" />
+        )}
         <SearchBar />
       </Box>
 

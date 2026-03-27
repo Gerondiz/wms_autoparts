@@ -7,25 +7,20 @@ import {
   Typography,
   IconButton,
   Box,
-  Badge,
   Tooltip,
   useTheme,
 } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import { useRouter } from '@/i18n/routing';
 import { useSession } from 'next-auth/react';
 import LanguageSwitcher from './LanguageSwitcher';
 import UserMenu from './UserMenu';
 import MiniCart from '../cart/MiniCart';
+import NavigationMenu from './NavigationMenu';
 
-interface HeaderProps {
-  onMenuClick?: () => void;
-}
-
-export default function Header({ onMenuClick }: HeaderProps) {
+export default function Header() {
   const t = useTranslations();
   const theme = useTheme();
   const router = useRouter();
@@ -42,16 +37,8 @@ export default function Header({ onMenuClick }: HeaderProps) {
       }}
     >
       <Toolbar disableGutters>
-        {/* Кнопка меню (для мобильной версии) */}
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          onClick={onMenuClick}
-          sx={{ ml: 1, display: { xs: 'flex', md: 'none' } }}
-        >
-          <MenuOutlinedIcon />
-        </IconButton>
+        {/* Навигационное меню (выпадающее) */}
+        <NavigationMenu />
 
         {/* Логотип / Название */}
         <Box

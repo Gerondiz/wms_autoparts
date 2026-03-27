@@ -6,6 +6,7 @@ import { SessionProvider } from 'next-auth/react';
 import MUIProvider from '@/components/layout/MUIProvider';
 import { getDirection } from '@/lib/utils/rtl';
 import { locales, type Locale } from '@/i18n/config';
+import AppLayout from '@/components/layout/AppLayout';
 
 /**
  * Генерация статических параметров для всех локалей
@@ -23,13 +24,13 @@ export default async function LocaleLayout({
 }) {
   // Next.js 15: params теперь Promise
   const { locale: localeParam } = await params;
-  
+
   // Получаем локаль из параметров или используем локаль по умолчанию
   const locale: Locale =
     localeParam === 'ru' || localeParam === 'en' || localeParam === 'ar'
       ? localeParam
       : routing.defaultLocale;
-  
+
   const messages = await getMessages();
   const session = await auth();
   const direction = getDirection(locale);
@@ -41,7 +42,9 @@ export default async function LocaleLayout({
         <SessionProvider session={session}>
           <NextIntlClientProvider messages={messages} locale={locale}>
             <MUIProvider>
-              {children}
+              <AppLayout>
+                {children}
+              </AppLayout>
             </MUIProvider>
           </NextIntlClientProvider>
         </SessionProvider>

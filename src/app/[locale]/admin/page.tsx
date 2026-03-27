@@ -27,7 +27,6 @@ import {
   TrendingUp as TrendingUpIcon,
   Warning as WarningIcon,
 } from '@mui/icons-material';
-import AdminLayout from '@/components/admin/AdminLayout';
 import StatCard from '@/components/admin/StatCard';
 
 interface DashboardData {
@@ -117,24 +116,18 @@ export default function AdminDashboardPage() {
 
   if (loading) {
     return (
-      <AdminLayout title={t('menu.dashboard')}>
-        <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
-          <CircularProgress />
-        </Box>
-      </AdminLayout>
+      <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+        <CircularProgress />
+      </Box>
     );
   }
 
   if (error) {
-    return (
-      <AdminLayout title={t('menu.dashboard')}>
-        <Alert severity="error">{error}</Alert>
-      </AdminLayout>
-    );
+    return <Alert severity="error">{error}</Alert>;
   }
 
   return (
-    <AdminLayout title={t('menu.dashboard')}>
+    <Box>
       <Box sx={{ mb: 4 }}>
         <Typography variant="h4" gutterBottom sx={{ fontWeight: 700 }}>
           {t('dashboard.welcome', { name: session?.user?.name || session?.user?.email || 'Admin' })}
@@ -409,6 +402,6 @@ export default function AdminDashboardPage() {
           </Paper>
         </Grid>
       </Grid>
-    </AdminLayout>
+    </Box>
   );
 }
