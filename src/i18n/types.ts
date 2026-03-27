@@ -33,18 +33,40 @@ export interface LocaleInfo {
 }
 
 /**
- * Контент для namespace
- * 
- * Определяет структуру файлов переводов
+ * Преобразует вложенный объект переводов в плоский тип с точечными ключами
+ * @example
+ * { common: { appName: string } } → { 'common.appName': string }
  */
-export type NamespaceContent<T extends Namespace> = 
-  T extends 'common' ? typeof import('../../locales/ru/common.json') :
-  T extends 'catalog' ? typeof import('../../locales/ru/catalog.json') :
-  T extends 'orders' ? typeof import('../../locales/ru/orders.json') :
-  T extends 'stock' ? typeof import('../../locales/ru/stock.json') :
-  T extends 'admin' ? typeof import('../../locales/ru/admin.json') :
-  T extends 'auth' ? typeof import('../../locales/ru/auth.json') :
-  never;
+export type FlattenTranslations<T extends Record<string, unknown>, Prefix extends string = ''> = {
+  [K in keyof T as K extends string
+    ? T[K] extends Record<string, unknown>
+      ? `${Prefix}${K}.${FlattenTranslations<T[K], ''> & string}`
+      : `${Prefix}${K}`
+    : never]: T[K] extends Record<string, unknown>
+    ? FlattenTranslations<T[K], ''>
+    : string;
+} extends infer Flat
+  ? { [K in keyof Flat as K extends string ? K : never]: Flat[K] }
+  : never;
+
+/**
+ * Базовый тип для плоских ключей перевода
+ */
+export type TranslationKeys<T extends Record<string, unknown>> = {
+  [K in keyof T]: T[K] extends Record<string, unknown>
+    ? `${string & K}.${keyof T[K] & string}`
+    : K extends string
+      ? K
+      : never;
+}[keyof T];
+
+/**
+ * Контент для namespace с поддержкой вложенной структуры
+ *
+ * next-intl использует точечную нотацию для доступа к вложенным ключам:
+ * t('common.appName') → обращается к { common: { appName: "..." } }
+ */
+export type NamespaceContent<T extends Namespace> = Record<string, string>;
 
 /**
  * Объединённый тип всех переводов
