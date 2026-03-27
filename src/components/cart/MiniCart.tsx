@@ -36,8 +36,7 @@ import { useLocale } from 'next-intl';
 export default function MiniCart() {
   const t = useTranslations('cart');
   const tCommon = useTranslations('common');
-  const tCatalog = useTranslations('catalog');
-  
+
   const router = useRouter();
   const locale = useLocale();
 
