@@ -316,7 +316,7 @@ export default function MiniCart() {
                     {t('totalItems')}:
                   </Typography>
                   <Typography variant="h6" fontWeight={700}>
-                    {totalItems} {tCatalog('pcs') || 'шт.'}
+                    {totalItems} {t('pcs') || 'шт.'}
                   </Typography>
                 </Box>
 
