@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { useLocale } from 'next-intl';
 import {
   AppBar,
   Toolbar,
@@ -19,12 +20,15 @@ import LanguageSwitcher from './LanguageSwitcher';
 import UserMenu from './UserMenu';
 import MiniCart from '../cart/MiniCart';
 import NavigationMenu from './NavigationMenu';
+import { isRTL } from '@/i18n/config';
 
 export default function Header() {
   const t = useTranslations();
   const theme = useTheme();
   const router = useRouter();
   const { data: session } = useSession();
+  const locale = useLocale() as 'ru' | 'en' | 'ar';
+  const isRtl = isRTL(locale);
 
   return (
     <AppBar
@@ -36,7 +40,7 @@ export default function Header() {
         boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
       }}
     >
-      <Toolbar disableGutters>
+      <Toolbar disableGutters sx={{ flexDirection: isRtl ? 'row-reverse' : 'row' }}>
         {/* Навигационное меню (выпадающее) */}
         <NavigationMenu />
 
@@ -45,8 +49,8 @@ export default function Header() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            ml: { xs: 1, md: 2 },
-            mr: { xs: 2, md: 4 },
+            ml: isRtl ? { xs: 2, md: 4 } : { xs: 1, md: 2 },
+            mr: isRtl ? { xs: 1, md: 2 } : { xs: 2, md: 4 },
             cursor: 'pointer',
           }}
           onClick={() => router.push('/catalog')}
@@ -78,16 +82,23 @@ export default function Header() {
         </Box>
 
         {/* Правая часть: Корзина, Язык, Профиль */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            gap: 1,
+            flexDirection: isRtl ? 'row-reverse' : 'row',
+          }}
+        >
           {/* Корзина */}
           <Tooltip title={t('common.cart')}>
             <MiniCart />
           </Tooltip>
 
-          {/* Переключатель языка */}
+          {/* Переключатель языка - dropdown вместо icons */}
           <Tooltip title={t('common.language')}>
             <Box>
-              <LanguageSwitcher variant="icons" />
+              <LanguageSwitcher variant="dropdown" showFlags showNames showCurrentLocale={false} />
             </Box>
           </Tooltip>
 
