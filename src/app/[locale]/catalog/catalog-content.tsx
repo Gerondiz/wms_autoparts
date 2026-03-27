@@ -9,11 +9,10 @@ import AddToCartDialog from '@/components/cart/AddToCartDialog';
 import { useHierarchyPath, useHierarchyNode } from '@/lib/hooks/api/useHierarchy';
 import { useParts } from '@/lib/hooks/api/useParts';
 import { useState, useCallback } from 'react';
-import { useHierarchy } from '@/contexts/HierarchyContext';
 
 export default function CatalogPage() {
   const t = useTranslations('catalog');
-  const { selectedNodeId } = useHierarchy();
+  const [selectedNodeId, setSelectedNodeId] = useState<number | null>(null);
   const [addToCartDialogOpen, setAddToCartDialogOpen] = useState(false);
   const [selectedPart, setSelectedPart] = useState<any>(null);
 
