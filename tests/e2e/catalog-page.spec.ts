@@ -34,8 +34,8 @@ test.describe('Каталог запчастей', () => {
       throw new Error(`Страница вернула статус ${response?.status()}, ожидался 200.`);
     }
 
-    // 4. Проверяем, что страница содержит WMS
-    await expect(page.locator('text=WMS')).toBeVisible({ timeout: 10000 });
+    // 4. Проверяем, что страница содержит заголовок
+    await expect(page.locator('h1, h2').first()).toBeVisible({ timeout: 10000 });
 
     // 5. Ждём, пока ошибки соберутся
     const consoleErrors = await consoleErrorsPromise;

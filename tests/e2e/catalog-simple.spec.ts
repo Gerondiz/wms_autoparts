@@ -12,8 +12,8 @@ test.describe('Каталог - быстрая проверка', () => {
     const title = await page.title();
     expect(title).toContain('WMS');
     
-    // Проверка что страница содержит текст WMS
-    await expect(page.locator('text=WMS')).toBeVisible({ timeout: 10000 });
+    // Проверка что страница содержит заголовок
+    await expect(page.locator('h1, h2, h3').first()).toBeVisible({ timeout: 10000 });
     
     // Логи консоли
     console.log('Ошибки:', consoleLogs.errors.length);

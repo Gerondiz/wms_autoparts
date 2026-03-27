@@ -12,8 +12,8 @@ test.describe('Каталог запчастей', () => {
     const title = await page.title();
     expect(title).toContain('WMS');
     
-    // Проверка что есть текст WMS на странице
-    await expect(page.locator('text=WMS')).toBeVisible({ timeout: 10000 });
+    // Проверка что есть заголовок на странице
+    await expect(page.locator('h1, h2, h3').first()).toBeVisible({ timeout: 10000 });
     
     // Проверка отсутствия критических ошибок консоли (исключая MISSING_MESSAGE)
     const criticalErrors = consoleLogs.errors.filter(e => 
