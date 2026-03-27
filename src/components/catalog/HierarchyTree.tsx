@@ -223,6 +223,7 @@ export default function HierarchyTree({
       {/* Дерево */}
       <Box sx={{ flex: 1, overflow: 'auto', p: 1 }}>
         <SimpleTreeView
+          data-testid="category-tree"
           expandedItems={expandedNodeIds}
           selectedItems={selectedNodeId?.toString() ?? null}
           onExpandedItemsChange={handleExpansionChange}
