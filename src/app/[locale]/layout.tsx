@@ -6,7 +6,8 @@ import { SessionProvider } from 'next-auth/react';
 import MUIProvider from '@/components/layout/MUIProvider';
 import { getDirection } from '@/lib/utils/rtl';
 import { locales, type Locale } from '@/i18n/config';
-import AppLayout from '@/components/layout/AppLayout';
+import { HierarchyProvider } from '@/contexts/HierarchyContext';
+import AppLayoutContent from '@/components/layout/AppLayoutContent';
 
 /**
  * Генерация статических параметров для всех локалей
@@ -42,9 +43,9 @@ export default async function LocaleLayout({
         <SessionProvider session={session}>
           <NextIntlClientProvider messages={messages} locale={locale}>
             <MUIProvider>
-              <AppLayout>
-                {children}
-              </AppLayout>
+              <HierarchyProvider>
+                <AppLayoutContent>{children}</AppLayoutContent>
+              </HierarchyProvider>
             </MUIProvider>
           </NextIntlClientProvider>
         </SessionProvider>

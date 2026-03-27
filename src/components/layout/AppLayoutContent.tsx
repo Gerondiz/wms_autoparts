@@ -5,15 +5,15 @@ import { Box, CssBaseline, Drawer, useMediaQuery, useTheme } from '@mui/material
 import Header from './Header';
 import SideMenu from './SideMenu';
 import HierarchyTree from '@/components/catalog/HierarchyTree';
-import { HierarchyProvider, useHierarchy } from '@/contexts/HierarchyContext';
+import { useHierarchy } from '@/contexts/HierarchyContext';
 
-interface AppLayoutProps {
+interface AppLayoutContentProps {
   children: React.ReactNode;
 }
 
 const DRAWER_WIDTH = 320;
 
-function AppLayoutContent({ children }: AppLayoutProps) {
+function AppLayoutContent({ children }: AppLayoutContentProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -78,10 +78,4 @@ function AppLayoutContent({ children }: AppLayoutProps) {
   );
 }
 
-export default function AppLayout({ children }: AppLayoutProps) {
-  return (
-    <HierarchyProvider>
-      <AppLayoutContent>{children}</AppLayoutContent>
-    </HierarchyProvider>
-  );
-}
+export default AppLayoutContent;
